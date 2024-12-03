@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 20px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            position: relative; /* Necesario para controlar los elementos superpuestos */
+            overflow: hidden;   /* Ocultar contenido extra */
+        }
+
+        /* Imagen dentro de la celda */
+        td img {
+            width: 100px; /* Tamaño inicial de la imagen */
+            height: auto;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Texto emergente dentro de la celda */
+        td .text {
+            width: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            opacity: 0; /* Ocultar por defecto */
+            pointer-events: none; /* Evita interacciones con el texto oculto */
+            transition: opacity 0,3s ease;
+        }
+
+        /* Efecto al pasar el cursor por la celda */
+        td:hover {
+            transform: scale(1.2); /* Agranda la celda */
+            background-color: #135f4c; /* Cambia el color de fondo */
+            border-radius: 15px;
+        }
+
+        td:hover img {
+            transform: scale(0.8); /* Reduce la imagen */
+            opacity: 0; /* Esconde la imagen */
+        }
+
+        td:hover .text {
+            opacity: 1; /* Muestra el texto */
+        }
+
+    </style>
+    <title>Contact Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+    
+</head>
+<body>
+    <header class="header">
+        <nav>
+           <ul class="nav-links">
+                <li><a href="index.html#principal">Home</a></li>
+                <li><a href="index.html#proyectos">Projects</a></li>
+                <li><a href="index.html#lenguajes">Languages</a></li>
+                <li><a href="index.html#correo">Contact</a></li>
+                <li><a href="curriculum_sintelefono.pdf">Curriculum</a></li>
+           </ul>            
+        </nav>
+        <div class="idioma">
+            <a href="https://www.linkedin.com/in/elena-ma%C3%B1ueco-cubillo-a11917226/"><img src="img/linkedin.png" width="50" alt=""></a>
+            <a class="btn" href="index.html"><button>Español</button></a>
+        </div>
+    </header>
+    <section class="principal" id="principal">
+        <img src="img/perfil.jpg" width="180" alt="" class="box-img">
+        <section class="nombre">
+            <h1>ELENA MAÑUECO CUBILLO</h1>
+            <br>
+            <h3>About Me:</h3>
+            <p>Computer Engineering student at CUNEF (2021-2025), passionate about technology and problem-solving. Experience in teamwork, leadership, and extracurricular activities such as sports and volunteering. Recipient of the Santander Women in STEM scholarship.</p><br>
+            <h3>Languages:</h3>
+            <p>English (C1 level) and intermediate-low level of French.</p><br>
+            <h3>Additional Skills:</h3>
+            <p>Experience as a camp counselor, certified lifeguard, and participation in sports activities and volunteer work focused on education and social assistance.</p> <br>
+        </section>
+    </section>
+
+    <section class="proyectos">
+        <h1>My Repositories on GitHub</h1>
+    <div class="repo-list" id="repo-list">
+        <!-- Los repositorios se cargarán aquí dinámicamente -->
+    </div>
+
+    <script>
+        // JavaScript para obtener y mostrar los repositorios de GitHub usando la API
+        const username = "elenamanueco";  // Reemplaza con tu nombre de usuario de GitHub
+
+        fetch(`https://api.github.com/users/${username}/repos`)
+            .then(response => response.json())
+            .then(repos => {
+                const repoList = document.getElementById('repo-list');
+                repos.forEach(repo => {
+                    const repoItem = document.createElement('div');
+                    repoItem.classList.add('repo-item');
+
+                    repoItem.innerHTML = `
+                        <h3>${repo.name}</h3>
+                        <p>${repo.description || 'No hay descripción disponible.'}</p>
+                        <a href="${repo.html_url}" target="_blank">Ver Repositorio</a>
+                    `;
+
+                    repoList.appendChild(repoItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error al obtener los repositorios:', error);
+            });
+    </script>
+    </section>
+
+    <section class="lenguajes" id="lenguajes">
+        <h1>Programming languages</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td><img src="img/c+++.png" width="90" alt="">
+                        <div class="text">Proficient in programming language usage for developing applications</div></td>
+                    <td><img src="img/java.jpg" width="90" alt="">
+                        <div class="text">Experience in object-oriented programming.</div></td>
+                    <td><img src="img/HTML.png" width="90" alt="">
+                        <div class="text">Creation and design of web pages.</div></td>
+                </tr>
+                <tr>
+                    <td><img src="img/python.png" width="120" alt="">
+                        <div class="text">Experience in predictive analysis, algorithm implementation, and development of various projects and programs.</div></td>
+                    <td><img src="img/EXCEL.png" width="90" alt="">
+                        <div class="text">Experience in information search, utilization, and processing.</div></td>
+                    <td><img src="img/R.png" width="100" alt="">
+                        <div class="text">Experience in statistical calculations, data analysis, and information exploitation, utilizing this language for data representation in various types of graphs.</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section class="correo" id="correo">
+        <hr>
+        <h1>CONTACT ME!</h1>
+        <form action="procesar_formulario.php" method="post">
+            <br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+            <label for="asunto">Subject:</label>
+            <input type="text" id="asunto" name="asunto" required>
+            <br>
+            <label for="descripcion">Description:</label>
+            <input type="" id="descripcion" name="descripcion" required>
+            <br>
+            <button type="submit">Send</button>
+        </form>
+    </section>
+
+</body>
+</html>
+
+
